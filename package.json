@@ -1,0 +1,20 @@
+{
+  "name": "2024-stefmakes-art",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@fontsource-variable/kalnia-glaze": "^5.0.1",
+    "@fontsource-variable/nunito": "^5.0.19",
+    "@fontsource/comforter": "^5.0.18",
+    "@fontsource/kalnia": "^5.0.1",
+    "@fontsource/nunito": "^5.0.18",
+    "astro": "^4.4.4"
+  }
+}

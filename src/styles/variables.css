@@ -1,0 +1,40 @@
+:root {
+    --black: #0C090A;
+    --white: #ffffff;    
+    --hot-pink: #E4287C;
+    --purple: #7D1B7E;
+    --lime: #9fff8a;
+
+
+    --font--cursive: "Comforter", cursive;
+    --font--serif: "Kalnia Glaze Variable", serif;
+    --font--sans-serif: "Nunito Variable", sans-serif;
+
+    --touch-target--min: 42px;    
+    --max-width--text: 30em;
+    --menu-width: 16rem;
+
+    --space--xs: 6px;
+    --space--sm: 12px;
+    --space--md: 24px;
+
+    --border-width--md: 2px;    
+}
+@media (min-width: 581px) {
+    :root {
+        --max-width--content: calc(100vw - var(--menu-width));
+    }
+}
+@font-palette-values --custom {
+    font-family: "Kalnia Glaze Variable";
+	override-colors:
+    0 #66357a,
+    1 #3b171f, 
+    2 #9fff8a,
+    3 #30fff5,
+    4 #a762ff,
+    5 #e4287c,
+    6 #ff29f2,
+    7 #e4287c,
+    8 #8800ff;
+}

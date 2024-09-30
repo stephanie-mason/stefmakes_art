@@ -1,0 +1,15 @@
+---
+import BaseLayout from './BaseLayout.astro';
+const { frontmatter } = Astro.props;
+---
+<BaseLayout pageTitle={frontmatter.title}>    
+    <em>{ frontmatter.date.toLocaleDateString("en-US", {month: 'long', day: 'numeric', year: 'numeric'}) }</em>
+
+    <slot />    
+</BaseLayout>
+
+<style is:global>
+    img {
+        max-width: 50vw;
+    }
+</style>

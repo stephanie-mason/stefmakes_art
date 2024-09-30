@@ -1,0 +1,44 @@
+html * {
+    box-sizing: border-box;
+}
+html {    
+    color: var(--black);
+    font-family: var(--font--sans-serif);
+    font-palette: --custom;    
+}
+html.dark {    
+    background-color: var(--black);
+    color: var(--white);        
+}
+body {
+    margin: 0;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font--cursive);
+    color: var(--hot-pink);    
+}
+a {
+    color: darkturquoise;
+    text-decoration-color: pink;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+    transition: all ease .2s;
+}
+a:hover,
+a:active,
+a:focus {
+    text-decoration-color: var(--hot-pink);
+    text-decoration-thickness: 4px;
+    letter-spacing: .05rem;
+}
+a:focus {
+    outline-style: solid;
+    outline-width: 2px;
+    outline-color: var(--purple);
+}
+html.dark a {
+    color: aqua;
+}
+p {
+    max-width: var(--max-width--text);
+}

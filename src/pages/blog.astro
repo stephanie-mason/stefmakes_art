@@ -1,0 +1,35 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from '../layouts/BaseLayout.astro';
+const allPosts = await getCollection("posts");
+const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
+const pageTitle = "Blog Archive";
+
+let { posts } = Astro.props;
+posts = allPosts.sort((a, b) => new Date(b.data.date) - new Date(a.data.date));
+---
+<BaseLayout pageTitle={pageTitle}>
+	<p>I was a semi-active blogger from 2008-2019. This is an archive of my posts from that time period, which contain a lot of old projects that are fun for me to look back on.</p>
+	
+	<div class="two-col">
+		<div class="col">
+			<ul>
+				{posts.map((post) => <li><a href={`/posts/${post.slug}/`}>{post.data.title} - {post.data.date.toLocaleDateString("en-US")}</a></li>)}
+			</ul>
+		</div>
+		
+		<div class="col">
+			<h2>Browse blog posts by tag</h2>
+			<ul>
+				{tags.map((tag) => <li><a href={`/tags/${tag}`}>{tag}</a></li>)}
+			</ul>
+		</div>
+	</div>
+</BaseLayout>
+
+<style>
+	.two-col {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+	}
+</style>

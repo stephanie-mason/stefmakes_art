@@ -1,0 +1,70 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import '@fontsource-variable/kalnia-glaze';
+import '@fontsource/comforter';
+import '@fontsource-variable/nunito';
+import "../styles/variables.css"
+import "../styles/main.css"
+import "../styles/helpers.css"
+
+const { pageTitle } = Astro.props;
+const siteTitle = "Stef Makes Art";
+---
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="generator" content={Astro.generator} />
+  <title>{pageTitle} | {siteTitle}</title>
+</head>
+<body>
+  <Header />
+  <main>
+    <h1>{pageTitle} <span aria-hidden="true">{pageTitle}</span></h1>  
+    <slot />    
+  </main>
+  <Footer />
+</body>
+</html>
+
+
+<style>
+  main {
+    max-width: var(--max-width--content);
+    padding: var(--space--xs);
+  }
+  @media (min-width: 581px) {
+    main {
+      padding: var(--space--md);
+    }
+  }
+  h1 {    
+    color: var(--hot-pink);    
+    text-shadow: rgba(0, 0, 0, 0.5) 1px 1px 2px;
+    font-size: 3rem;
+    font-family: var(--font--serif);
+    font-weight: 500;
+    line-height: 1;       
+    padding-left: 2rem;
+    padding-top: 1rem;
+    position: relative;    
+  }
+  h1 span {    
+    font-family: var(--font--cursive);       
+    font-weight: 700;
+    font-size: 5rem;
+    filter: opacity(0.08);
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    line-height: 1;
+  }
+  .dark h1 span {
+    filter: opacity(0.2);
+    color: aqua;
+  }
+</style>

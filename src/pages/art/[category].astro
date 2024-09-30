@@ -1,0 +1,73 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Card from '../../components/Card.astro';
+
+export async function getStaticPaths() {
+  const allProjects = await getCollection("projects");
+  const uniqueCategories = [...new Set(allProjects.map((project) => project.data.categories).flat())];
+  
+  return uniqueCategories.map((category) => {
+    const filteredProjects = allProjects.filter((project) => project.data.categories.includes(category));
+    return {
+      params: { category },
+      props: { projects: filteredProjects },
+    };
+  });
+}
+
+function prettyTitle(thing) {
+  return thing
+  .split('-')
+  .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+  .join(' ');
+}
+
+const { category } = Astro.params;
+let { projects } = Astro.props;
+
+// Sort projects in reverse chronological order
+projects = projects.sort((a, b) => new Date(b.data.date) - new Date(a.data.date));
+
+const categoryDescriptions = {
+  'misc': 'Older projects and one-off experiments.',
+  'knit-crochet': 'I have been knitting and crocheting since 2003. From 2012-2018, I was very prolific and designed and sold patterns. I don\'t have a lot of those projects showcased here, but they can be found on my Ravelry. In recent years I have slowed down a lot due to physical restraints, but I still deeply enjoy the craft. Here I have some of my more recent completed projects, as well as a few favorite older designs.',
+  'sewing': 'I have been sewing since I was a little girl. I became more serious about the craft as a young adult, and have made probably hundreds of projects over the years, many of which I never manage to photograph. In fact, my sewing projects are probably my least documented of anything I do. But every once in awhile I do manage to take photos of the things I\'ve sewn—usually when there is some other element of creativity involved.',
+  'default': ''
+};
+const categoryDescription = categoryDescriptions[category] || categoryDescriptions['default'];
+---
+
+<BaseLayout pageTitle={prettyTitle(category)}>
+  <p>{categoryDescription}</p>
+  <div class="cards">
+    {projects.map((project) => {
+      const year = project.data.date.getFullYear();
+      const month = project.data.date.getMonth();
+      const fullMonth = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+      return (
+      <Card 
+      title={project.data.title} 
+      href={`/projects/${project.slug}/`}
+      image={project.data.cover}
+      image_alt={project.data.cover_alt}
+      >
+      <p>{fullMonth[month]} {year}</p>
+      <p>{project.data.materials} {project.data.dimensions}</p>
+    </Card>
+    );
+    })}
+  </div>
+</BaseLayout>
+
+<style>
+  .cards {
+    display: flex;
+    justify-content: start;
+    flex-flow: row wrap;
+    gap: var(--space--xs);
+  }
+  .cards p {
+    margin: 0;
+  }
+</style>

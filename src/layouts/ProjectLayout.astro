@@ -1,0 +1,121 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { Image } from 'astro:assets';
+const { frontmatter } = Astro.props;
+---
+<BaseLayout pageTitle={frontmatter.title}>    
+    
+    <p>
+        <em>{ new Date(frontmatter.date).toLocaleDateString("en-US", {month: 'long', day: 'numeric', year: 'numeric'}) }</em><br/>
+        { frontmatter.materials }, { frontmatter.dimensions }
+        <slot/>
+    </p>
+
+    <div class="thumbnails">
+        {frontmatter.videos?.map((video, index) => (
+            <button class="thumbnail video">
+                <video width="600">
+                    <source src={video} type="video/mp4"/>
+                </video>
+            </button>
+            ))
+        }
+        {frontmatter.images?.map((image, index) => (
+            <button class="thumbnail">
+                <Image src={image} alt={frontmatter.image_alts[index]} width="600"/>
+            </button>
+            ))
+        }
+        <button class="thumbnail">
+            <Image src={ frontmatter.cover } alt={ frontmatter.cover_alt} width="600" id="coverImage"/>
+        </button>
+    </div>
+    
+    <div class="cover-image">
+        <Image src={ frontmatter.cover } alt={ frontmatter.cover_alt} width="600" id="coverImage"/>
+    </div>
+    
+</BaseLayout>
+<script>
+    const thumbnails = document.querySelectorAll(".thumbnail");
+    const cover = document.querySelector(".cover-image");    
+    
+    thumbnails.forEach(thumbnail => {
+        thumbnail.addEventListener('click', () => {
+            const img_in = thumbnail.querySelector("img, video").cloneNode(true);
+            const img_out = cover.querySelector("img, video");
+            
+            img_in.classList.add("fade");
+            cover.appendChild(img_in);
+            
+            img_out.classList.add("fade-out");
+            
+            img_in.addEventListener('animationend', () => {
+                cover.removeChild(img_out);
+                if (img_in.tagName === "VIDEO") {
+                    img_in.currentTime = 0;
+                    img_in.controls = true;
+                    img_in.muted = true;
+                    img_in.play();
+                }
+            });
+        });
+    });
+</script>
+<style>
+    .cover-image {
+        display: grid;
+        margin-bottom: var(--space--sm);
+    }
+    .cover-image img,
+    .cover-image video {
+        max-width: 100%;
+        height: unset;
+        grid-row: 1/ span 1;
+        grid-column: 1/ span 1;
+        transition: opacity 0.5s;
+    }
+    .thumbnails {
+        display: flex;
+        flex-flow: row wrap;
+        gap: var(--space--xs);
+        margin-bottom: 0.5rem;
+    }
+    .thumbnail {    
+        width: 15vw;
+        height: 15vw;
+        max-width: 150px;
+        max-height: 150px;
+        display: block;
+        background: transparent;
+        padding: 0;
+        
+        transition: box-shadow ease 0.2s;
+        border: solid 2px aqua;
+    }
+    .thumbnail:active,
+    .thumbnail:hover,
+    .thumbnail:focus {
+        box-shadow: var(--lime) 3px 3px 3px
+    }
+    .thumbnail img,
+    .thumbnail video {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .fade {
+        opacity: 1;
+        animation: fade-in 0.5s forwards;
+    }
+    .fade-out {
+        opacity: 0;
+        transition: opacity 0.5s;
+    }
+    @keyframes fade-in {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+</style>

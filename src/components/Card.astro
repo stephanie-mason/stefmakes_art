@@ -1,0 +1,56 @@
+---
+import { Image } from 'astro:assets';
+const { title, href, image, image_alt } = Astro.props;
+---
+<div class="card" href={href}>    
+    <a href={href}><h2>{title}</h2></a>
+    <Image src={image} alt={image_alt} width="300"/>
+    
+    <slot />
+</div>
+<style>
+    .card {        
+        display: flex;    
+        flex-flow: column;
+        position: relative;              
+        padding: var(--space--sm);
+        max-width: calc(100vw - (var(--space--xs)*2));
+    }
+    a {
+        display: inline-block;
+        text-decoration: none;
+        
+    }
+    a:before {
+        display: block;
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;        
+
+        transition: box-shadow ease 0.2s;
+        border: solid 2px aqua;
+    }
+    a:active,
+    a:hover,
+    a:focus {
+        letter-spacing: unset;
+    }
+    a:active:before,
+    a:focus:before,
+    a:hover:before {
+        box-shadow: var(--lime) 3px 3px 3px
+    }
+    h2 {
+        margin-bottom: var(--space--xs);
+    }
+    img {
+        order: -1;
+        width: calc(100% + var(--space--sm) * 2);
+        height: 350px;
+        object-fit: cover;
+        margin: calc(-1 * var(--space--sm));
+    }
+</style>
