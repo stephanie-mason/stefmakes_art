@@ -1,7 +1,7 @@
 ---
 title: "Hunson Abadeer"
 date: 2024-03-31
-categories: ["animal-portraits"]
+categories: ["animals"]
 materials: ["Oil on Panel"]
 dimensions: "8\" x 10\""
 cover: "./hunson-eclipse-2.jpeg"

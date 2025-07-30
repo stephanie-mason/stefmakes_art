@@ -1,7 +1,7 @@
 ---
 title: "Fox Banners"
 date: 2024-08-07
-categories: ["animal-portraits", "sewing"]
+categories: ["animals", "sewing"]
 materials: ["Dye Paint on Fabric"]
 dimensions: "24\" x 42\""
 cover: "./fox-b-1.jpeg"

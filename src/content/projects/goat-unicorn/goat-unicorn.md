@@ -1,7 +1,7 @@
 ---
 title: "Unicorn"
 date: 2024-10-28
-categories: ["animal-portraits"]
+categories: ["animals"]
 materials: ["Watercolor, Gouache, Colored Pencil, Alcohol Marker"]
 dimensions: "9\" x 12\""
 cover: "./goat-unicorn-3.jpeg"
