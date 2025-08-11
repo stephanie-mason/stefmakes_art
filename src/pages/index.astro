@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Card from '../components/Card.astro';
 import { Image } from 'astro:assets';
-import stefPic from '../images/stef.webp';
+import stefPic from '../images/stef-2025.webp';
 
 const pageTitle = "Hi There";
 const allProjects = await getCollection("projects");
@@ -13,8 +13,8 @@ projects = allProjects.sort((a, b) => new Date(b.data.date) - new Date(a.data.da
 ---
 <BaseLayout pageTitle={pageTitle}>
 	
-	<div class="clearfix">
-		<Image src={stefPic} alt="Stephanie Paulantis standing next to an art quilt in front of a truck, wearing a crocheted top and holographic bell bottoms" width="500"/>
+	<div class="intro">
+		<Image src={stefPic} alt="Stephanie Paulantis with bright pink flowers in her hair" width="650"/>
 		
 		<p>I'm Stephanie Paulantis, this is my website.</p>
 		<p> 
@@ -40,7 +40,7 @@ projects = allProjects.sort((a, b) => new Date(b.data.date) - new Date(a.data.da
 		{projects.map((project) => {
 			const year = project.data.date.getFullYear();
 			const month = project.data.date.getMonth();
-			const fullMonth = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+			const fullMonth = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 			return (
 			<Card 
 			title={project.data.title} 
@@ -57,8 +57,10 @@ projects = allProjects.sort((a, b) => new Date(b.data.date) - new Date(a.data.da
 </BaseLayout>
 
 <style>
-	.clearfix {
-		overflow: auto;
+	.intro {
+		--max-width--text: 50em;
+		width: var(--max-width--text);
+		max-width: calc(100vw - var(--space--sm));
 	}
 	.cards {
 		display: flex;
@@ -70,9 +72,10 @@ projects = allProjects.sort((a, b) => new Date(b.data.date) - new Date(a.data.da
 		margin: 0;
 	}
 	img {
-		float: right;
+		float: left;
+		width: 60%;
 		max-width: 50vw;
+		margin-right: var(--space--sm);
 		height: unset;
-		margin-left: var(--space--sm);
 	}	}
 </style>
