@@ -57,10 +57,11 @@ projects = allProjects.sort((a, b) => new Date(b.data.date) - new Date(a.data.da
 </BaseLayout>
 
 <style>
+	p {
+		max-width: none;
+	}
 	.intro {
-		--max-width--text: 50em;
-		width: var(--max-width--text);
-		max-width: calc(100vw - var(--space--sm));
+		max-width: 50rem;
 	}
 	.cards {
 		display: flex;

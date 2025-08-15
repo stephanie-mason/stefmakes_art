@@ -20,7 +20,7 @@
 
     --border-width--md: 2px;    
 }
-@media (min-width: 581px) {
+@media (min-width: 778px) {
     :root {
         --max-width--content: calc(100vw - var(--menu-width));
     }
