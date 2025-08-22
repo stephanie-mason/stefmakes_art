@@ -1,9 +1,12 @@
 ---
 import Hamburger from './Hamburger.astro';
 import ThemeIcon from '../components/ThemeIcon.astro';
+import { Image } from 'astro:assets';
+import Logo from '../images/logo.webp';
 ---
-<span class="site-title">stef makes.art</span>
-<h2 class="tagline">creative projects by stephanie paulantis</h2>
+<div class="logo">
+    <Image src={Logo} alt="Artwork by Stephanie Paulantis (colorful logo)" width="275"/>
+</div>
 
 <Hamburger />
 <div class="main-navigation">          
@@ -86,11 +89,12 @@ import ThemeIcon from '../components/ThemeIcon.astro';
         display: flex;
         flex-flow: column;
         height: 92vh;
-        width: 100%;
-        overflow-y: auto;
-        
+        width: 100%;        
+        overflow-y: auto;              
+
         padding: var(--space--md);  
     }
+
     
     h2 {
         margin: 0;
@@ -111,47 +115,28 @@ import ThemeIcon from '../components/ThemeIcon.astro';
         color: var(--black);
     }
     
-    .site-title {   
+    .logo img {
         display: block;
-        position: fixed;
-        right: 1rem;
-        bottom: 1rem;
-        z-index: 2;
-        transform: rotate(-8deg);      
-        transform-origin: top left;
-        
-        font-family: var(--font--cursive);
-        font-size: 3rem;
-        color: aqua;
-        line-height: 1;              
+        margin: auto;
     }
-    .tagline {
-        display: block;
-        position: fixed;
-        right: 1rem;
-        bottom: 1rem;
-        z-index: 2;
-        color: pink;
-        
-        font-family: var(--font--cursive);
-        font-size: 1.4rem;
-    }    
-    
-    @media (max-width: 778px) {
-        .site-title:after {
+
+    @media (min-width: 778px) {
+        .logo {
+            margin-right: var(--menu-width);
+        }
+    }
+
+    @media (min-width: 1165px) {
+        .logo {   
+            margin: 0;
             display: block;
-            content: '';
-            width: 150%;
-            height: 100%;
-            background-color: orange;
-            opacity: 0.8;
-            position: absolute;
-            left: -25%;
-            top: 0;
-            z-index: -1;
+            position: fixed;
+            right: 1rem;
+            bottom: 1rem;
+            z-index: 2;
         }
-        .tagline {
-            color: var(--hot-pink);
+        nav {
+            height: calc(100vh - 160px);
         }
     }
-    </style>
+</style>
