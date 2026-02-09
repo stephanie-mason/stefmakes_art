@@ -1,5 +1,5 @@
 ---
-title:  "["crochet", "pattern"]: Dish Scrubber"
+title:  "Dish Scrubber"
 date: 2013-07-05 14:00:35
 tags: ["crochet", "pattern"]
 ---
